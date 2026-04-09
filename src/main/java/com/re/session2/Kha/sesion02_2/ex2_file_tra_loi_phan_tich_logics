@@ -1,0 +1,10 @@
+#	|                    Vị trí	                |       Loại vấn đề	                        |       Mô tả hậu quả
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1   |   <%! private int requestCounter = 0; %>	|   Race Condition	                        |   Biến dùng chung cho nhiều request → nhiều user truy cập cùng lúc sẽ gây sai lệch dữ liệu
+2	|   <% requestCounter++; %>	                |   Logic trong View	                    |   Xử lý logic trong JSP vi phạm MVC → khó bảo trì, khó test
+3	|   <%= sv.getName() %>	                    |   XSS	                                    |   Nếu dữ liệu chứa script → có thể bị tấn công XSS
+4	|   <%= sv.getScore()%>;	                |   Syntax lỗi	                            |   hiển thị sai dữ liệu hoặc lỗi
+5	|   for (int i = 0; i < list.size(); i++)	|   code Java trong JSP	                    |    khó đọc, không đúng chuẩn Spring MVC
+6	|   Logic xếp loại trong JSP	            |   Vi phạm MVC	                            |   Business logic nằm trong View → nên đưa về Controller/Service
+7	|   request.getAttribute(...)	            |   Phụ thuộc request	                    |   Không dùng EL → code dài, khó đọc
+8	|   <!-- comment -->	                    |   HTML comment	                        |   Hiển thị ra client → lộ thông tin nội bộ

@@ -1,0 +1,19 @@
+Lỗi 1: MyWEBAppInitializer
+tại sao  "/api/*" lỗi
+là vì  "/api/*" nó chỉ xử lý các resquets bắt đầu là "/api/....." vậy nếu mà ta truy cập URL là "/home",... thì sẽ 404
+cách sửa: sẽ thay thế bằng "/"
+
+Lỗi 2: WebConfig
+@ComponentScan(basePackages = "com.demo.service")
+dòng này nghĩa là spring sẽ quét com.demo.service tìm thấy các @Component, @Service,@Repository,@Controller
+nếu có sẽ tạo bean nếu ko có sẽ 404 ->mà triong cấu trúc thuw mục ta ko có nê sẽ 404
+cách sử lý: @ComponentScan(basePackages = "com.demo")
+
+Tổng hợp:   Nếu chỉ sửa lỗi 1 (Servlet Mapping) mà không sửa lỗi 2 (ComponentScan),
+            ứng dụng có chạy không? Tại sao?
+
+trả lời : nếu chỉ sửa 1 lỗi thì vẫn dẫn nếu 404 ,
+            Nếu chỉ sửa lỗi 1 (Servlet Mapping) thì sẽ nhânj các resquest "/"
+            nhưng mà ko sẽ ko quét ra dc @Controller thì sẽ ko khởi tạo
+            được Bean thì sẽ vẫn 404
+cách xử lý: phải sửa cả 2 lỗi này
